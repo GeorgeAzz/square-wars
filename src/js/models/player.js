@@ -3,13 +3,14 @@ class Player extends Sprite {
     super(position, motion, size, color, hasGravity);
   }
 
-  shoot({ clientX, clientY }) {
+  shoot({ clientY, clientX }) {
     const angle = Math.atan2(
-      clientY - canvas.height / 2,
-      clientX - canvas.width / 2,
+      clientY - player.position.y,
+      clientX - player.position.x,
     );
 
     const motion = { x: Math.cos(angle), y: Math.sin(angle) };
+
     bullets.push(
       new Bullet(
         {
