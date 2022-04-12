@@ -1,6 +1,8 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+const CANT_BE_OUTSIDE_FIELD = true
+
 run();
 
 const bullets = [];
@@ -31,7 +33,7 @@ const keys = {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
 
-  player.update();
+  player.update(CANT_BE_OUTSIDE_FIELD);
   bullets.forEach((b) => b.update());
 
   player.motion.x = 0;

@@ -1,6 +1,6 @@
 function run() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight / 2;
+  canvas.width = 1025;
+  canvas.height = 550;
 
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
