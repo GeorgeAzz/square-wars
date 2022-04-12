@@ -7,8 +7,16 @@ const CANT_BE_OUTSIDE_FIELD = true;
 
 run();
 
-const player = new Player(
+const player = new Character(
   { x: 70, y: 10 },
+  { x: 0, y: 0 },
+  { width: 50, height: 50 },
+  "red",
+  true,
+);
+
+const enemy = new Character(
+  { x: 870, y: 10 },
   { x: 0, y: 0 },
   { width: 50, height: 50 },
   "red",
@@ -34,6 +42,7 @@ const keys = {
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
 
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
+  enemy.updatePosition(CANT_BE_OUTSIDE_FIELD);
   spritesStore.bullets.forEach((b) => b.updatePosition());
 
   spritesStore.removeBulletsFromOutside();
