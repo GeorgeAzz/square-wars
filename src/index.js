@@ -38,6 +38,7 @@ const keys = {
   spritesStore.enemies.forEach((e) => e.updatePosition());
 
   spritesStore.removeBulletsFromOutside();
+  spritesStore.removeDiedEnemy();
 
   player.motion.x = 0;
 
@@ -75,8 +76,8 @@ const intervalId = setInterval(() => {
   spritesStore.addEnemy(
     new Character(
       {
-        x: getRandomNumber(20, canvas.width),
-        y: getRandomNumber(20, canvas.height),
+        x: getRandomNumber(50, canvas.width),
+        y: getRandomNumber(50, canvas.height),
       },
       { x: 0, y: 0 },
       { width: 50, height: 50 },
