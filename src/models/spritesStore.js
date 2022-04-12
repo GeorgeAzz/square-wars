@@ -27,12 +27,20 @@ class SpritesStore {
     if (!this.bullets.length) return;
 
     this.enemies = this.enemies.filter((enemy) => {
-      return this.bullets.some((bullet) => {
-        console.log(bullet.position.x)
-        console.log(enemy.position.x )
-        return (
-          bullet.position.x === enemy.position.x 
-        );
+      return this.bullets.some((bullet, index) => {
+        const detectBulletInX =
+          enemy.position.x + enemy.size.width > bullet.position.x &&
+          bullet.position.x > enemy.position.x;
+
+        const detectBulletInY =
+          enemy.position.y + enemy.size.height > bullet.position.y &&
+          bullet.position.y > enemy.position.y;
+
+        // if (detectBulletInX && detectBulletInY) {
+        //   this.bullets.splice(index, 1);
+        // }
+
+        return !detectBulletInX || !detectBulletInY;
       });
     });
   }

@@ -76,12 +76,15 @@ const intervalId = setInterval(() => {
   spritesStore.addEnemy(
     new Character(
       {
-        x: getRandomNumber(50, canvas.width),
-        y: getRandomNumber(50, canvas.height),
+        x: getRandomNumber(50, canvas.width - 50),
+        y: getRandomNumber(50, canvas.height - 50),
       },
       { x: 0, y: 0 },
-      { width: 50, height: 50 },
-      "red",
+      {
+        width: getRandomNumber(25, 70),
+        height: getRandomNumber(25, 70),
+      },
+      getRandomColor(),
       true,
     ),
   );
