@@ -9,9 +9,9 @@ class Player extends Sprite {
       clientX - player.position.x,
     );
 
-    const motion = { x: Math.cos(angle) * 5, y: Math.sin(angle) * 5 };
+    const motion = { x: Math.cos(angle) * 10, y: Math.sin(angle) * 10 };
 
-    bullets.push(
+    spritesStore.addBullet(
       new Bullet(
         {
           x: player.position.x,

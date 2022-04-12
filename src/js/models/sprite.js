@@ -18,7 +18,7 @@ class Sprite {
     );
   }
 
-  update(cantBeOutsideField) {
+  updatePosition(cantBeOutsideField) {
     this.draw();
 
     this.position.y += this.motion.y;
