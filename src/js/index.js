@@ -1,13 +1,11 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const garbageCollector = new GarbageCollector();
+const spritesStore = new SpritesStore();
 
 const CANT_BE_OUTSIDE_FIELD = true;
 
 run();
-
-let bullets = [];
 
 const player = new Player(
   { x: 70, y: 10 },
@@ -35,10 +33,10 @@ const keys = {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
 
-  player.update(CANT_BE_OUTSIDE_FIELD);
-  bullets.forEach((b) => b.update());
+  player.updatePosition(CANT_BE_OUTSIDE_FIELD);
+  spritesStore.bullets.forEach((b) => b.updatePosition());
 
-  garbageCollector.removeBulletsFromOutside();
+  spritesStore.removeBulletsFromOutside();
 
   player.motion.x = 0;
 
