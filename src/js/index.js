@@ -1,11 +1,13 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const CANT_BE_OUTSIDE_FIELD = true
+const garbageCollector = new GarbageCollector();
+
+const CANT_BE_OUTSIDE_FIELD = true;
 
 run();
 
-const bullets = [];
+let bullets = [];
 
 const player = new Player(
   { x: 70, y: 10 },
@@ -35,6 +37,8 @@ const keys = {
 
   player.update(CANT_BE_OUTSIDE_FIELD);
   bullets.forEach((b) => b.update());
+
+  garbageCollector.removeBulletsFromOutside();
 
   player.motion.x = 0;
 
