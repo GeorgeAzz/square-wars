@@ -15,14 +15,6 @@ const player = new Character(
   true,
 );
 
-const enemy = new Character(
-  { x: 870, y: 10 },
-  { x: 0, y: 0 },
-  { width: 50, height: 50 },
-  "red",
-  true,
-);
-
 const keys = {
   d: {
     isPressed: false,
@@ -42,8 +34,8 @@ const keys = {
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
 
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
-  enemy.updatePosition(CANT_BE_OUTSIDE_FIELD);
   spritesStore.bullets.forEach((b) => b.updatePosition());
+  spritesStore.enemies.forEach((e) => e.updatePosition());
 
   spritesStore.removeBulletsFromOutside();
 
@@ -78,3 +70,22 @@ window.addEventListener("keyup", ({ key }) => {
 });
 
 window.addEventListener("click", player.shoot);
+
+const intervalId = setInterval(() => {
+  spritesStore.addEnemy(
+    new Character(
+      {
+        x: getRandomNumber(20, canvas.width),
+        y: getRandomNumber(20, canvas.height),
+      },
+      { x: 0, y: 0 },
+      { width: 50, height: 50 },
+      "red",
+      true,
+    ),
+  );
+}, 2000);
+
+document
+  .getElementById("stop")
+  .addEventListener("click", () => clearInterval(intervalId));
