@@ -7,7 +7,7 @@ const CANT_BE_OUTSIDE_FIELD = true;
 
 run();
 
-const player = new Player(
+const player = new Character(
   { x: 70, y: 10 },
   { x: 0, y: 0 },
   { width: 50, height: 50 },
@@ -35,8 +35,10 @@ const keys = {
 
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
   spritesStore.bullets.forEach((b) => b.updatePosition());
+  spritesStore.enemies.forEach((e) => e.updatePosition());
 
   spritesStore.removeBulletsFromOutside();
+  spritesStore.removeDiedEnemy();
 
   player.motion.x = 0;
 
@@ -69,3 +71,25 @@ window.addEventListener("keyup", ({ key }) => {
 });
 
 window.addEventListener("click", player.shoot);
+
+const intervalId = setInterval(() => {
+  spritesStore.addEnemy(
+    new Character(
+      {
+        x: getRandomNumber(50, canvas.width - 50),
+        y: getRandomNumber(50, canvas.height - 50),
+      },
+      { x: 0, y: 0 },
+      {
+        width: getRandomNumber(25, 70),
+        height: getRandomNumber(25, 70),
+      },
+      getRandomColor(),
+      true,
+    ),
+  );
+}, 2000);
+
+document
+  .getElementById("stop")
+  .addEventListener("click", () => clearInterval(intervalId));
