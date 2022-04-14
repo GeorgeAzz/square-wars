@@ -7,7 +7,7 @@ const CANT_BE_OUTSIDE_FIELD = true;
 
 run();
 
-const player = new Character(
+const player = new Player(
   { x: 70, y: 10 },
   { x: 0, y: 0 },
   { width: 50, height: 50 },
@@ -27,6 +27,8 @@ const keys = {
   },
 };
 
+let playerCanMoveX = true;
+
 (function animation() {
   requestAnimationFrame(animation);
 
@@ -35,18 +37,30 @@ const keys = {
 
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
   spritesStore.bullets.forEach((b) => b.updatePosition());
-  spritesStore.enemies.forEach((e) => e.updatePosition());
+  spritesStore.enemies.forEach((enemy) => {
+    enemy.updatePosition();
+
+    if (
+      player.position.x + player.size.width + player.motion.x >
+      enemy.position.x
+    ) {
+      console.log(1);
+      playerCanMoveX = false;
+    } else {
+      playerCanMoveX = true;
+    }
+  });
 
   spritesStore.removeBulletsFromOutside();
   spritesStore.removeDiedEnemy();
 
   player.motion.x = 0;
 
-  if (keys.a.isPressed) {
+  if (playerCanMoveX && keys.a.isPressed) {
     player.motion.x = -5;
   }
 
-  if (keys.d.isPressed) {
+  if (playerCanMoveX && keys.d.isPressed) {
     player.motion.x = 5;
   }
 
@@ -74,7 +88,7 @@ window.addEventListener("click", player.shoot);
 
 const intervalId = setInterval(() => {
   spritesStore.addEnemy(
-    new Character(
+    new Sprite(
       {
         x: getRandomNumber(50, canvas.width - 50),
         y: getRandomNumber(50, canvas.height - 50),

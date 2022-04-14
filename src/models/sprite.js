@@ -26,7 +26,7 @@ class Sprite {
     if (
       cantBeOutsideField &&
       (this.position.x + this.size.width + this.motion.x > canvas.width ||
-        this.position.x + this.motion.x < 0)
+        this.position.x + this.motion.x < 0) // detecting the side walls
     ) {
       this.motion.x = 0;
     } else {
