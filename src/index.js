@@ -27,8 +27,6 @@ const keys = {
   },
 };
 
-let playerCanMoveX = true;
-
 (function animation() {
   requestAnimationFrame(animation);
 
@@ -39,16 +37,7 @@ let playerCanMoveX = true;
   spritesStore.bullets.forEach((b) => b.updatePosition());
   spritesStore.enemies.forEach((enemy) => {
     enemy.updatePosition();
-
-    if (
-      player.position.x + player.size.width + player.motion.x >
-      enemy.position.x
-    ) {
-      console.log(1);
-      playerCanMoveX = false;
-    } else {
-      playerCanMoveX = true;
-    }
+    enemy.catchPLayer();
   });
 
   spritesStore.removeBulletsFromOutside();
@@ -88,7 +77,7 @@ window.addEventListener("click", player.shoot);
 
 const intervalId = setInterval(() => {
   spritesStore.addEnemy(
-    new Sprite(
+    new Enemy(
       {
         x: getRandomNumber(50, canvas.width - 50),
         y: getRandomNumber(50, canvas.height - 50),
@@ -99,7 +88,7 @@ const intervalId = setInterval(() => {
         height: getRandomNumber(25, 70),
       },
       getRandomColor(),
-      true,
+      // true,
     ),
   );
 }, 2000);

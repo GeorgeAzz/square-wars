@@ -29,15 +29,15 @@ class SpritesStore {
     this.enemies = this.enemies.filter((enemy) => {
       return this.bullets.every((bullet, index) => {
         const bulletPosX = bullet.position.x + bullet.size.width / 2;
-        const bulletPosy = bullet.position.y + bullet.size.height / 2;
+        const bulletPosY = bullet.position.y + bullet.size.height / 2;
 
         const detectBulletInX =
           enemy.position.x + enemy.size.width > bulletPosX &&
           bulletPosX > enemy.position.x;
 
         const detectBulletInY =
-          enemy.position.y + enemy.size.height > bulletPosy &&
-          bulletPosy > enemy.position.y;
+          enemy.position.y + enemy.size.height > bulletPosY &&
+          bulletPosY > enemy.position.y;
 
         if (detectBulletInX && detectBulletInY) {
           this.bullets.splice(index, 1);
