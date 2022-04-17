@@ -45,11 +45,11 @@ const keys = {
 
   player.motion.x = 0;
 
-  if (playerCanMoveX && keys.a.isPressed) {
+  if (keys.a.isPressed) {
     player.motion.x = -5;
   }
 
-  if (playerCanMoveX && keys.d.isPressed) {
+  if (keys.d.isPressed) {
     player.motion.x = 5;
   }
 
@@ -88,7 +88,6 @@ const intervalId = setInterval(() => {
         height: getRandomNumber(25, 70),
       },
       getRandomColor(),
-      // true,
     ),
   );
 }, 2000);
