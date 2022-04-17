@@ -12,7 +12,7 @@ class Enemy extends Sprite {
       playerCenterY > this.position.y &&
       playerCenterY < this.position.y + this.size.height
     ) {
-      console.log("catch");
+      console.log("catched");
     }
   }
 }
