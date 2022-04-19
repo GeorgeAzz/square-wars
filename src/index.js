@@ -28,7 +28,7 @@ const keys = {
 };
 
 (function animation() {
-  requestAnimationFrame(animation);
+  const animationId = requestAnimationFrame(animation);
 
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
@@ -38,6 +38,10 @@ const keys = {
   spritesStore.enemies.forEach((enemy) => {
     enemy.updatePosition();
     enemy.catchPLayer();
+
+    if (enemy.isPlayerWasCatched) {
+      cancelAnimationFrame(animationId);
+    }
   });
 
   spritesStore.cleanup();
