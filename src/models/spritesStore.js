@@ -4,17 +4,22 @@ class SpritesStore {
     this.enemies = [];
   }
 
+  cleanup() {
+    this.removeSpritesFromOutside("bullets");
+    this.removeSpritesFromOutside("enemies");
+  }
+
   addBullet(bullet) {
     this.bullets.push(bullet);
   }
 
-  removeBulletsFromOutside() {
-    this.bullets = this.bullets.filter((bullet) => {
+  removeSpritesFromOutside(sprites) {
+    this[sprites] = this[sprites].filter((sprite) => {
       return (
-        bullet.position.x < canvas.width &&
-        bullet.position.y < canvas.height &&
-        bullet.position.x + bullet.size.width > 0 &&
-        bullet.position.y + bullet.size.height > 0
+        sprite.position.x < canvas.width &&
+        sprite.position.y < canvas.height &&
+        sprite.position.x + sprite.size.width > 0 &&
+        sprite.position.y + sprite.size.height > 0
       );
     });
   }

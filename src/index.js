@@ -40,7 +40,7 @@ const keys = {
     enemy.catchPLayer();
   });
 
-  spritesStore.removeBulletsFromOutside();
+  spritesStore.cleanup();
   spritesStore.removeDiedEnemy();
 
   player.motion.x = 0;
