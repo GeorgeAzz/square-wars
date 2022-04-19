@@ -1,6 +1,8 @@
 class Enemy extends Sprite {
   constructor(position, motion, size, color, hasGravity) {
     super(position, motion, size, color, hasGravity);
+
+    this.isPlayerWasCatched = false;
   }
 
   catchPLayer() {
@@ -12,7 +14,7 @@ class Enemy extends Sprite {
       playerCenterY > this.position.y &&
       playerCenterY < this.position.y + this.size.height
     ) {
-      console.log("catch");
+      this.isPlayerWasCatched = true;
     }
   }
 }

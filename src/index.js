@@ -28,7 +28,7 @@ const keys = {
 };
 
 (function animation() {
-  requestAnimationFrame(animation);
+  const animationId = requestAnimationFrame(animation);
 
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
@@ -38,9 +38,13 @@ const keys = {
   spritesStore.enemies.forEach((enemy) => {
     enemy.updatePosition();
     enemy.catchPLayer();
+
+    if (enemy.isPlayerWasCatched) {
+      cancelAnimationFrame(animationId);
+    }
   });
 
-  spritesStore.removeBulletsFromOutside();
+  spritesStore.cleanup();
   spritesStore.removeDiedEnemy();
 
   player.motion.x = 0;
@@ -73,16 +77,24 @@ window.addEventListener("keyup", ({ key }) => {
   }
 });
 
-window.addEventListener("click", player.shoot);
+window.addEventListener("click", player.shoot.bind(player));
 
 const intervalId = setInterval(() => {
+  const enemyPosX = getRandomNumber(canvas.width + 20, 0);
+  const enemyPosY = getRandomNumber(0, -20);
+
+  const { x: directionX, y: directionY } = getFromToCoordinatesDirection(
+    player.position.x - enemyPosX,
+    player.position.y - enemyPosY,
+  );
+
   spritesStore.addEnemy(
     new Enemy(
       {
-        x: getRandomNumber(50, canvas.width - 50),
-        y: getRandomNumber(50, canvas.height - 50),
+        x: enemyPosX,
+        y: enemyPosY,
       },
-      { x: 0, y: 0 },
+      { x: directionX * 5, y: directionY * 5 },
       {
         width: getRandomNumber(25, 70),
         height: getRandomNumber(25, 70),
@@ -90,7 +102,7 @@ const intervalId = setInterval(() => {
       getRandomColor(),
     ),
   );
-}, 2000);
+}, 1500);
 
 document
   .getElementById("stop")
