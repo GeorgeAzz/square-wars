@@ -27,6 +27,8 @@ const keys = {
   },
 };
 
+let intervalId;
+
 (function animation() {
   const animationId = requestAnimationFrame(animation);
 
@@ -40,6 +42,7 @@ const keys = {
     enemy.catchPLayer();
 
     if (enemy.isPlayerWasCatched) {
+      clearInterval(intervalId);
       cancelAnimationFrame(animationId);
     }
   });
@@ -79,7 +82,7 @@ window.addEventListener("keyup", ({ key }) => {
 
 window.addEventListener("click", player.shoot.bind(player));
 
-const intervalId = setInterval(() => {
+intervalId = setInterval(() => {
   const enemyPosX = getRandomNumber(canvas.width + 20, 0);
   const enemyPosY = getRandomNumber(0, -20);
 
