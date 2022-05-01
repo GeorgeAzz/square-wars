@@ -36,6 +36,8 @@ let intervalId;
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
 
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
+  player.holdGun();
+
   spritesStore.bullets.forEach((b) => b.updatePosition());
   spritesStore.enemies.forEach((enemy) => {
     enemy.updatePosition();
@@ -48,7 +50,6 @@ let intervalId;
   });
 
   spritesStore.cleanup();
-  spritesStore.removeDiedEnemy();
 
   player.motion.x = 0;
 

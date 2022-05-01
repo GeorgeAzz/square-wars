@@ -7,6 +7,7 @@ class SpritesStore {
   cleanup() {
     this.removeSpritesFromOutside("bullets");
     this.removeSpritesFromOutside("enemies");
+    this.removeDiedEnemy();
   }
 
   addBullet(bullet) {
