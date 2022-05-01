@@ -38,17 +38,7 @@ let intervalId;
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
   player.holdGun();
 
-  spritesStore.bullets.forEach((b) => b.updatePosition());
-  spritesStore.enemies.forEach((enemy) => {
-    enemy.updatePosition();
-    enemy.catchPLayer();
-
-    if (enemy.isPlayerWasCatched) {
-      clearInterval(intervalId);
-      cancelAnimationFrame(animationId);
-    }
-  });
-
+  spritesStore.update(animationId);
   spritesStore.cleanup();
 
   player.motion.x = 0;

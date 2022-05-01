@@ -4,6 +4,19 @@ class SpritesStore {
     this.enemies = [];
   }
 
+  update(animationId) {
+    this.bullets.forEach((b) => b.updatePosition());
+    this.enemies.forEach((enemy) => {
+      enemy.updatePosition();
+      enemy.catchPLayer();
+
+      if (enemy.isPlayerWasCatched) {
+        clearInterval(intervalId);
+        cancelAnimationFrame(animationId);
+      }
+    });
+  }
+
   cleanup() {
     this.removeSpritesFromOutside("bullets");
     this.removeSpritesFromOutside("enemies");
