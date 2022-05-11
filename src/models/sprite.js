@@ -36,7 +36,7 @@ class Sprite {
     if (!this.hasGravity) return;
 
     if (this.position.y + this.size.height + this.motion.y >= canvas.height) {
-      // if palyer touch the "ground" - stop
+      // if sprite with gravity touch the "ground" - stop
       this.motion.y = 0;
     } else {
       this.motion.y += this.gravity; // acceleration while falling

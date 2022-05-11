@@ -13,9 +13,16 @@ class Player extends Sprite {
   }
 
   holdGun() {
-    this.gun.updatePosition();
+    this.gun.gunDraw();
+
     this.gun.position.x = this.position.x + this.size.width / 2 - 5;
     this.gun.position.y = this.position.y + this.size.height / 2 - 5;
+  }
+
+  aim({ clientY, clientX }) {
+    const dx = clientX - this.gun.position.x;
+    const dy = clientY - this.gun.position.y;
+    this.gun.angle = Math.atan2(dy, dx);
   }
 
   shoot({ clientY, clientX }) {
