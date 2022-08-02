@@ -71,7 +71,7 @@ window.addEventListener("keyup", ({ key }) => {
 });
 
 window.addEventListener("click", player.shoot.bind(player));
-window.addEventListener("mousemove", player.aim.bind(player));
+// window.addEventListener("mousemove", player.aim.bind(player));
 
 intervalId = setInterval(() => {
   const enemyPosX = getRandomNumber(canvas.width + 20, 0);
