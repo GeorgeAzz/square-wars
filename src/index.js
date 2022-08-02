@@ -27,25 +27,18 @@ const keys = {
   },
 };
 
+let intervalId;
+
 (function animation() {
   const animationId = requestAnimationFrame(animation);
 
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
-
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
-  spritesStore.bullets.forEach((b) => b.updatePosition());
-  spritesStore.enemies.forEach((enemy) => {
-    enemy.updatePosition();
-    enemy.catchPLayer();
+  player.holdGun();
 
-    if (enemy.isPlayerWasCatched) {
-      cancelAnimationFrame(animationId);
-    }
-  });
-
+  spritesStore.update(animationId);
   spritesStore.cleanup();
-  spritesStore.removeDiedEnemy();
 
   player.motion.x = 0;
 
@@ -78,8 +71,9 @@ window.addEventListener("keyup", ({ key }) => {
 });
 
 window.addEventListener("click", player.shoot.bind(player));
+// window.addEventListener("mousemove", player.aim.bind(player));
 
-const intervalId = setInterval(() => {
+intervalId = setInterval(() => {
   const enemyPosX = getRandomNumber(canvas.width + 20, 0);
   const enemyPosY = getRandomNumber(0, -20);
 
