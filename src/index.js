@@ -35,7 +35,7 @@ let intervalId;
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height); // update canvas before draw other elements
   player.updatePosition(CANT_BE_OUTSIDE_FIELD);
-  player.holdGun();
+  // player.holdGun();
 
   spritesStore.update(animationId);
   spritesStore.cleanup();
